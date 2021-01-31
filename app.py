@@ -30,7 +30,6 @@ def parse_args():
 
 
 def main() -> int:
-
     [width, height], path, estimate_only, ammount_only, black_white = parse_args()
     path += '/' if path[-1] != '/' else ''
 
