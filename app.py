@@ -22,29 +22,30 @@ def parse_args():
                         help='Prints the estimated size of (all) images and exit.')
     parser.add_argument('---ammount-only', default=False, required=False, nargs='?',
                         help='Prints the total number of images that would be generated and exit.')
+    parser.add_argument('---black-white', default=False, required=False, nargs='?', help='If given, all images will be black and white (RGB 0,0,0 and 255,255,255)')
 
     args = parser.parse_args()
 
-    return args.size, args.path, args.estimate_only, args.ammount_only
+    return args.size, args.path, args.estimate_only, args.ammount_only, args.black_white
 
 
 def main() -> int:
 
-    [width, height], path, estimate_only, ammount_only = parse_args()
+    [width, height], path, estimate_only, ammount_only, black_white = parse_args()
     path += '/' if path[-1] != '/' else ''
 
     if not os.path.isdir(path):
         os.makedirs(path)
 
     if estimate_only != False:
-        print(_math.estimate_size(width, height, path))
+        print(_math.estimate_size(width, height, path, black_white == None))
         return 0
 
     if ammount_only != False:
-        print(f'{_math.ammount_of_images(width * height)} images')
+        print(f'{_math.ammount_of_images(width * height, black_white == None)} images')
         return 0
 
-    for color in itertools.product(itertools.product(range(256), repeat=3), repeat=(width * height)):
+    for color in itertools.product(itertools.product(range(256) if black_white != None else range(0, 256, 255), repeat=3), repeat=(width * height)):
         color = color[::-1]
 
         img = Image.new('RGB', (width, height))
