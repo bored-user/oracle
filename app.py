@@ -22,7 +22,8 @@ def parse_args():
                         help='Prints the estimated size of (all) images and exit.')
     parser.add_argument('---ammount-only', default=False, required=False, nargs='?',
                         help='Prints the total number of images that would be generated and exit.')
-    parser.add_argument('---black-white', default=False, required=False, nargs='?', help='If given, all images will be black and white (RGB 0,0,0 and 255,255,255)')
+    parser.add_argument('---black-white', default=False, required=False, nargs='?',
+                        help='If given, all images will be black and white (RGB 0,0,0 and 255,255,255)')
 
     args = parser.parse_args()
 
