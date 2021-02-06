@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-def to_readable(bytes) -> str:
+def to_readable(bytes: Decimal) -> str:
     KB = Decimal(1024)
     MB = Decimal(KB ** 2)  # 1,048,576
     GB = Decimal(KB ** 3)  # 1,073,741,824
