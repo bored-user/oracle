@@ -6,44 +6,42 @@ import uuid
 
 from PIL import Image
 
-import _math
-
-ABSPATH = os.path.abspath(os.path.dirname(__file__))
+import utils
 
 
 def parse_args():
+    abspath = os.path.abspath(os.path.dirname(__file__))
+
     parser = argparse.ArgumentParser(
         description='Generate all possible image combinations using a given width and height')
     parser.add_argument('-s', '--size', required=True, type=int,
                         nargs=2, help='Width and height of images (in pixels)')
-    parser.add_argument('-p', '--path', default=f'{ABSPATH}/images', required=False, type=str,
-                        help=f'Path where the images will be saved (defaults to {ABSPATH}/images)')
-    parser.add_argument('---estimate-only', default=False, required=False, nargs='?',
+    parser.add_argument('-p', '--path', default=f'{abspath}/images', required=False, type=str,
+                        help=f'Path where the images will be saved (defaults to {abspath}/images)')
+    parser.add_argument('---estimate-size', action='store_true',
                         help='Prints the estimated size of (all) images and exit.')
-    parser.add_argument('---ammount-only', default=False, required=False, nargs='?',
+    parser.add_argument('---estimate-ammount', action='store_true',
                         help='Prints the total number of images that would be generated and exit.')
     parser.add_argument('---black-white', default=False, required=False, nargs='?',
                         help='If given, all images will be black and white (RGB 0,0,0 and 255,255,255)')
 
     args = parser.parse_args()
 
-    return args.size, args.path, args.estimate_only, args.ammount_only, args.black_white
+    return args.size, args.path, args.estimate_size, args.estimate_ammount, args.black_white
 
 
 def main() -> int:
-    [width, height], path, estimate_only, ammount_only, black_white = parse_args()
+    [width, height], path, estimate_size, estimate_ammount, black_white = parse_args()
     path += '/' if path[-1] != '/' else ''
 
     if not os.path.isdir(path):
         os.makedirs(path)
 
-    if estimate_only != False:
-        print(_math.estimate_size(width, height, path, black_white == None))
-        return 0
+    if estimate_size:
+        return print(utils.estimate_size(width, height, path, black_white == None)) or 0
 
-    if ammount_only != False:
-        print(f'{_math.ammount_of_images(width * height, black_white == None)} images')
-        return 0
+    if estimate_ammount:
+        return print(f'{utils.ammount_of_images(width * height, black_white == None)} images') or 0
 
     for color in itertools.product(itertools.product(range(256) if black_white != None else range(0, 256, 255), repeat=3), repeat=(width * height)):
         color = color[::-1]

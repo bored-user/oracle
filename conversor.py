@@ -1,6 +1,8 @@
 from decimal import Decimal
 
-def to_readable(bytes) -> str:
+def to_readable(bytes: Decimal) -> str:
+    bytes = Decimal(bytes)
+
     KB = Decimal(1024)
     MB = Decimal(KB ** 2)  # 1,048,576
     GB = Decimal(KB ** 3)  # 1,073,741,824
@@ -11,7 +13,7 @@ def to_readable(bytes) -> str:
     YB = Decimal(KB ** 8)  # 1.2089258196146292e+24
 
     if bytes < KB:
-        return '{0:.2f} bytes'.format(bytes)
+        return '{0:.2f} B'.format(bytes)
     elif KB <= bytes < MB:
         return '{0:.2f} KB'.format(bytes/KB)
     elif MB <= bytes < GB:
