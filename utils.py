@@ -3,7 +3,9 @@ import random
 import uuid
 
 from PIL import Image
+
 import conversor
+
 
 def ammount_of_images(
     area: int, bw: bool) -> int: return ((256 if not bw else 2) ** 3) ** area

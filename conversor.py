@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+
 def to_readable(bytes: Decimal) -> str:
     bytes = Decimal(bytes)
 
