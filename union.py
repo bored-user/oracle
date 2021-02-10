@@ -15,7 +15,3 @@ def union(width: int, height: int, black_and_white: bool = False):
 
         yield img
 
-if __name__ == '__main__':
-    for i in union(1000, 1000):
-        i.save(str(uuid.uuid4()) + '.jpg')
-
