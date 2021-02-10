@@ -7,6 +7,7 @@ import uuid
 from PIL import Image
 
 import utils
+import union
 
 
 def parse_args():
@@ -43,18 +44,7 @@ def main() -> int:
     if estimate_ammount:
         return print(f'{utils.ammount_of_images(width * height, black_white)} images') or 0
 
-    for color in itertools.product(itertools.product(range(256) if black_white else range(0, 256, 255), repeat=3), repeat=(width * height)):
-        color = color[::-1]
-
-        img = Image.new('RGB', (width, height))
-        _map = img.load()
-
-        for x in range(width):
-            for y in range(height):
-                _map[x, y] = color[y + width * x]
-
-        img.save(f"{path}{uuid.uuid4()}.jpg")
-
+    [ img.save(f'{path}{uuid.uuid4()}.jpg') for img in union.union(width, height, black_white) ]
     return 0
 
 
