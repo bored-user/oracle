@@ -14,4 +14,3 @@ def union(width: int, height: int, black_and_white: bool = False):
                 _map[x, y] = c[y + width * x]
 
         yield img
-
