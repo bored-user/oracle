@@ -1,10 +1,7 @@
 import argparse
-import itertools
 import os
 import sys
 import uuid
-
-from PIL import Image
 
 import utils
 import union
