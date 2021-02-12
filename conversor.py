@@ -23,11 +23,11 @@ def to_readable(bytes: Decimal) -> str:
         return '{0:.2f} GB'.format(bytes/GB)
     elif TB <= bytes < PB:
         return '{0:.2f} TB'.format(bytes/TB)
-    elif PB <= bytes < TB:
+    elif PB <= bytes < EB:
         return '{0:.2f} PB'.format(bytes/PB)
-    elif EB <= bytes < PB:
+    elif EB <= bytes < ZB:
         return '{0:.2f} EB'.format(bytes/EB)
-    elif ZB <= bytes < EB:
+    elif ZB <= bytes < YB:
         return '{0:.2f} ZB'.format(bytes/ZB)
     else:
         return '{0:.2f} YB'.format(bytes/YB)
