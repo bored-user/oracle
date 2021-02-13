@@ -7,14 +7,12 @@ from PIL import Image
 import conversor
 
 
-def ammount_of_images(
-    area: int, bw: bool) -> int: return ((256 if not bw else 2) ** 3) ** area
+def ammount_of_images(area: int, bw: bool) -> int: return (16777216 if not bw else 2) ** area
 
 
 def estimate_size(width: int, height: int, path: str, bw: bool) -> str:
-    names = [uuid.uuid4(), uuid.uuid4(), uuid.uuid4()]
-    imgs = [Image.new('RGB', (width, height)), Image.new(
-        'RGB', (width, height)), Image.new('RGB', (width, height))]
+    names = [uuid.uuid4() for _ in range(3)]
+    imgs = [Image.new('RGB', (width, height)) for _ in range(3)]
     sizes = []
 
     for i in range(3):
@@ -22,8 +20,7 @@ def estimate_size(width: int, height: int, path: str, bw: bool) -> str:
 
         for x in range(width):
             for y in range(height):
-                _map[x, y] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) if not bw else (
-                    random.choices([0, 255])[0], random.choices([0, 255])[0], random.choices([0, 255])[0])
+                _map[x, y] = (random.randint(0, 255) for _ in range(3)) if not bw else random.choice([(0, 0, 0), (255, 255, 255)])
 
         _path = f'{path}{names[i]}.jpg'
         imgs[i].save(_path)
