@@ -16,11 +16,11 @@ def estimate_size(width: int, height: int, path: str, bw: bool) -> str:
     sizes = []
 
     for i in range(3):
-        _map = imgs[i].load()
+        img = imgs[i].load()
 
         for x in range(width):
             for y in range(height):
-                _map[x, y] = (random.randint(0, 255) for _ in range(3)) if not bw else random.choice([(0, 0, 0), (255, 255, 255)])
+                img[x, y] = tuple(random.randint(0, 255) for _ in range(3)) if not bw else random.choice([(0, 0, 0), (255, 255, 255)])
 
         _path = f'{path}{names[i]}.jpg'
         imgs[i].save(_path)
