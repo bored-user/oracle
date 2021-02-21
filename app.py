@@ -4,7 +4,7 @@ import sys
 import uuid
 
 import utils
-import union
+import oracle
 
 
 def parse_args():
@@ -41,7 +41,7 @@ def main() -> int:
     if estimate_ammount:
         return print(f'{utils.ammount_of_images(width * height, black_white)} images') or 0
 
-    [ img.save(f'{path}{uuid.uuid4()}.jpg') for img in union.union(width, height, black_white) ]
+    [ img.save(f'{path}{uuid.uuid4()}.jpg') for img in oracle.oracle(width, height, black_white) ]
     return 0
 
 
