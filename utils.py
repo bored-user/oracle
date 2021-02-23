@@ -3,6 +3,7 @@ import random
 import uuid
 
 from PIL import Image
+from decimal import Decimal
 
 import conversor
 
@@ -27,4 +28,4 @@ def estimate_size(width: int, height: int, path: str, bw: bool) -> str:
         sizes.append(os.stat(_path).st_size)
         os.remove(_path)
 
-    return conversor.to_readable((sum(sizes) / 3) * ammount_of_images(width * height, bw))
+    return conversor.to_readable(Decimal(sum(sizes)) / Decimal(3) * Decimal(ammount_of_images(width * height, bw)))
