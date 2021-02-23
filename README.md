@@ -11,6 +11,7 @@ Calculate and generate all possible NxN images (where `N` is a user-given intege
     * `-p` (`--path`): The path where the images will be stored. Defaults to `$PWD/images`
     * `---estimate-size`: If given, will estimate the total size that would've been taken by the images and exit
     * `---estimate-ammount`: If given, will estimate (actually, it's not an estimative) the total ammount of images that would've been generated and exit
+    * `-e` (`--estimate`): Alias to `---estimate-size ---estimate-ammount`
     * `---black-white`: If given, will generate only black and white (`rgb(0, 0, 0) and rgb(255, 255, 255)`) images (affects the estimatives as well)
 
 Examples:
